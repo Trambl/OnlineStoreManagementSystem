@@ -30,16 +30,12 @@ class Customers:
             case 5:
                 return True
                 
-                
-    # Users should be able to add new products with details like product name, price, and quantity in stock.
-    # Users should be able to view all products and their details.
-    # Users should be able to update product information (e.g., price or quantity).
-    # Users should be able to remove products from the store.
             
     def view():
         """Allows user to view current data in a json file"""
         df = pd.DataFrame(data)
         print(df)
+    
     
     def add(name, email):
         """Allows user to add data in a json file"""
@@ -50,6 +46,7 @@ class Customers:
         new_customer = {"id": id, "name": name, "email": email}
         data.append(new_customer)
         write_json(file_path, data)
+        
         
     def update():
         """Allows user to update already existing json record"""
