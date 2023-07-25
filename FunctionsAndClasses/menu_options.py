@@ -1,3 +1,14 @@
+import re
+import json
+
+def is_valid_email(email):
+    pattern = r'^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern, email) is not None
+
+def write_json(file_path, data):
+        with open(file_path, "w") as json_file:
+            json.dump(data, json_file, indent=4)
+            
 def main_menu():
     print("Main Menu:"\
         "\n\t1. Products"\
@@ -54,3 +65,4 @@ def orders_menu():
         "\n\t4. Change order status"\
         "\n\t5. Return to Main Menu")
     return input("Please choose between options 1-5: ")
+
