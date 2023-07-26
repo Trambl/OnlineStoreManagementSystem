@@ -4,6 +4,8 @@ sys.path.append("FunctionsAndClasses")
 
 from menu_options import *
 import customers as c
+import products as p
+import orders as o
 
 def main():
     print("Welcome to Management System!")
@@ -15,8 +17,8 @@ def main():
                     match choice:
                         case 1:
                             option = int(products_menu())
-                            print(choice)
-                            break  # Exit the inner loop and return to the main menu
+                            if p.Products.option(option):
+                                break # Exit the inner loop and return to the main menu
                         case 2:
                             option = int(customers_menu())
                             if c.Customers.option(option):
