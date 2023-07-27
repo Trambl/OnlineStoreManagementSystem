@@ -44,13 +44,14 @@ def main():
 
 
 def process_action(choice, option):
-    action = ACTION_MAPPING.get((choice, option))
+    action = ACTION_MAPPING.get((choice, option))   
     if action:
         action()
         return True
     else:
         print(50 * "-")
         return False
+
 
 def process_menu_choice(choice):
     match choice:
