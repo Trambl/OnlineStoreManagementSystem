@@ -1,10 +1,9 @@
 import sys
-sys.path.append("FunctionsAndClasses")
 
-import show_menu
-from customers import Customers
-from products import Products
-from orders import Orders
+from FunctionsAndClasses import show_menu
+from FunctionsAndClasses.customers import Customers
+from FunctionsAndClasses.products import Products
+from FunctionsAndClasses.orders import Orders
 
 
 ACTION_MAPPING = {
