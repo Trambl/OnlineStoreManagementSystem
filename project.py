@@ -1,6 +1,6 @@
 import sys
 
-from FunctionsAndClasses import show_menu
+import FunctionsAndClasses.show_menu as show_menu
 from FunctionsAndClasses.customers import Customers
 from FunctionsAndClasses.products import Products
 from FunctionsAndClasses.orders import Orders
