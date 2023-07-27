@@ -26,10 +26,10 @@
         "total price": "8,680,000.00"
     },
     {
-        "id": 7,
-        "name": "F",
-        "quantity": "12.00",
-        "price": "25.00",
-        "total price": "300.00"
+        "id": 8,
+        "name": "Cheese",
+        "quantity": "10.00",
+        "price": "15.00",
+        "total price": "150.00"
     }
 ]

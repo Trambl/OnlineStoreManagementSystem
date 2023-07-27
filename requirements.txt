@@ -1,1 +1,1 @@
-pip install pandas - Pandas module
+pandas==2.0.3

@@ -1,40 +1,22 @@
 import json
 import os
 import pandas as pd
-from menu_options import is_valid_email, write_json
+from show_menu import is_valid_email, write_json
+    
     
 class Customers:
-    @classmethod
-    def option(cls, option):
-        global file_path
+    @classmethod   
+    def file_info(cls):
         file_path = os.path.join(os.path.dirname(__file__), "..", "Data", "customers.json")
         with open(file_path, "r") as json_file:
-            global data
-            data = json.load(json_file)   
-        match option:  
-            case 1:
-                cls.view()
-            case 2:
-                while True:
-                    name = input("Please provide customer name: ").title()
-                    if not name:
-                        continue
-                    email = input("Please provide customer email address: ").lower()
-                    if is_valid_email(email):
-                        break
-                    else:
-                        print("Email is not valid.")
-                cls.add(name, email)
-            case 3:
-                cls.update()
-            case 4:
-                cls.remove()
-            case 5:
-                return True
-                
-            
-    def view():
+            data = json.load(json_file)
+        return file_path, data
+        
+        
+    @classmethod     
+    def view(cls):
         """Allows user to view current data in a json file"""
+        _, data = cls.file_info()
         df = pd.DataFrame(data)
         print("-" * 50)
         if not df.empty:
@@ -43,13 +25,27 @@ class Customers:
             print("No customers in the DB right now")
             
     
-    
-    def add(name, email):
+    @classmethod 
+    def add(cls):
         """Allows user to add data in a json file"""
+        file_path, data = cls.file_info()
         if data:
             id = max(data, key=lambda x: x["id"])["id"] + 1
         else:
             id = 1
+            
+        while True:
+            name = input("Please provide customer name: ").title()
+            if name:
+                break
+            
+        while True:
+            email = input("Please provide customer email address: ").lower()
+            if is_valid_email(email):
+                break
+            else:
+                print("Email is not valid.")
+        
         new_customer = {"id": id, "name": name, "email": email}
         data.append(new_customer)
         write_json(file_path, data)
@@ -57,9 +53,10 @@ class Customers:
         print("User added")
         
         
-        
-    def update():
+    @classmethod   
+    def update(cls):
         """Allows user to update already existing json record"""
+        file_path, data = cls.file_info()
         while True:
             try:
                 id = int(input("Please specify user id to edit the user: "))
@@ -94,9 +91,10 @@ class Customers:
             print("User not found")
         
 
-
-    def remove():
+    @classmethod
+    def remove(cls):
         """Allows user to remove already existing json record"""
+        file_path, data = cls.file_info()
         
         while True:
             try:

@@ -1,65 +1,61 @@
 import json
 import os
 import pandas as pd
-from menu_options import write_json
+from show_menu import write_json
+
 
 class Products:
-    @classmethod
-    def option(cls, option):
-        global file_path
+    @classmethod   
+    def file_info(cls):
         file_path = os.path.join(os.path.dirname(__file__), "..", "Data", "products.json")
         with open(file_path, "r") as json_file:
-            global data
-            data = json.load(json_file)   
-        match option:  
-            case 1:
-                cls.view()
-            case 2:
-                while True:
-                    name = input("Please provide Product name: ").title()
-                    if not name:
-                        continue
-                    
-                    while True:
-                        try: 
-                            price = round(float(input("Please provide product price: ")), 2)
-                            break
-                        except ValueError:
-                            print("Price should be a number.")
-                            continue
-                    
-                    while True:
-                        try: 
-                            quantity = round(float(input("Please provide product quantity: ")),2)
-                            break
-                        except ValueError:
-                            print("Quantity should be a number.")
-                            continue
-                    break
-                            
-                cls.add(name, price, quantity)
-            case 3:
-                cls.update()
-            case 4:
-                cls.remove()
-            case 5:
-                return True
-                
-    def view():
+            data = json.load(json_file)
+        return file_path, data
+    
+    
+    @classmethod            
+    def view(cls):
         """Allows user to view current data in a json file"""
+        _, data = cls.file_info()
         df = pd.DataFrame(data)
         print("-" * 50)
         if not df.empty:
             print(df)
         else:
             print("No products in the DB right now")
-            
-    def add(name, price, quantity):
+    
+    
+    @classmethod       
+    def add(cls):
         """Allows user to add data in a json file"""
+        file_path, data = cls.file_info()
+        
         if data:
             id = max(data, key=lambda x: x["id"])["id"] + 1
         else:
             id = 1
+        
+        while True:
+            name = input("Please provide product name: ").title()
+            if name:
+                break  
+            
+        while True:
+            try: 
+                price = round(float(input("Please provide product price: ")), 2)
+                break
+            except ValueError:
+                print("Price should be a number.")
+                continue  
+            
+        while True:
+            try: 
+                quantity = round(float(input("Please provide product quantity: ")),2)
+                break
+            except ValueError:
+                print("Quantity should be a number.")
+                continue
+            
         total_price = quantity * price
         
         price = "{:,.2f}".format(price)
@@ -71,9 +67,12 @@ class Products:
         write_json(file_path, data)
         print("-" * 50)
         print("Product added")
-        
-    def update():
+     
+     
+    @classmethod   
+    def update(cls):
         """Allows user to update already existing json record"""
+        file_path, data = cls.file_info()
         while True:
             try:
                 id = int(input("Please specify product id to edit the product: "))
@@ -135,9 +134,10 @@ class Products:
             print("Product not found")
         
 
-
-    def remove():
+    @classmethod   
+    def remove(cls):
         """Allows user to remove already existing json record"""
+        file_path, data = cls.file_info()
         
         while True:
             try:
