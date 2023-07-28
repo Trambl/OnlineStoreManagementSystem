@@ -19,6 +19,7 @@ class Customers:
         _, data = cls.file_info()
         df = pd.DataFrame(data)
         print("-" * 50)
+        
         if not df.empty:
             print(df)
         else:
@@ -29,6 +30,7 @@ class Customers:
     def add(cls):
         """Allows user to add data in a json file"""
         file_path, data = cls.file_info()
+        
         if data:
             id = max(data, key=lambda x: x["id"])["id"] + 1
         else:
@@ -57,6 +59,7 @@ class Customers:
     def update(cls):
         """Allows user to update already existing json record"""
         file_path, data = cls.file_info()
+        
         while True:
             try:
                 id = int(input("Please specify user id to edit the user: "))
@@ -73,16 +76,20 @@ class Customers:
                 
         if found:
             name = input("Update name (press Enter if you don't want to update it): ").title()
+
             while True:
                 email = input("Update email (press Enter if you don't want to update it): ").lower()
                 if is_valid_email(email) or email == "":
                     break
                 else:
                     print("Email is not valid.")
+                    
             if name:
                 data[index_to_update]["name"] = name
+                
             if email:
                 data[index_to_update]["email"] = email
+                
             write_json(file_path, data)
             print("-" * 50)
             print("Information updated")
@@ -103,8 +110,7 @@ class Customers:
             except ValueError:
                 print("User id should be a number")
         
-        found = False
-        
+        found = False 
         for index, d in enumerate(data):
             if id == d["id"]:
                 found = True
