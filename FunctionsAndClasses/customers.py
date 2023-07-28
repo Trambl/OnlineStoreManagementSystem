@@ -51,7 +51,7 @@ class Customers:
         data.append(new_customer)
         write_json(file_path, data)
         print("-" * 50)
-        print("User added")
+        print("Customer added")
           
     @classmethod   
     def update(cls):
@@ -60,10 +60,10 @@ class Customers:
         
         while True:
             try:
-                id = int(input("Please specify user id to edit the user: "))
+                id = int(input("Please specify customer id to edit the customer: "))
                 break
             except ValueError:
-                print("User id should be a number")
+                print("customer id should be a number")
         
         found = False
         
@@ -93,7 +93,7 @@ class Customers:
             print("Information updated")
         else:
             print("-" * 50)
-            print("User not found")
+            print("Customer not found")
         
     @classmethod
     def remove(cls):
@@ -102,10 +102,10 @@ class Customers:
         
         while True:
             try:
-                id = int(input("Please specify user id to be removed: "))
+                id = int(input("Please specify customer id to be removed: "))
                 break
             except ValueError:
-                print("User id should be a number")
+                print("Customer id should be a number")
         
         found = False 
         for index, d in enumerate(data):
@@ -132,4 +132,4 @@ class Customers:
                     break
         else:
             print("-" * 50)
-            print("User not found")
+            print("Customer not found")
