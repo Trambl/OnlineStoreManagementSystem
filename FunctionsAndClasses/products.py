@@ -7,15 +7,15 @@ from FunctionsAndClasses.show_menu import write_json
 class Products:
     @classmethod   
     def file_info(cls):
+        # Class method to get file information, including file path and data, from the products.json file.
         file_path = os.path.join(os.path.dirname(__file__), "..", "Data", "products.json")
         with open(file_path, "r") as json_file:
             data = json.load(json_file)
         return file_path, data
     
-    
     @classmethod            
     def view(cls):
-        """Allows user to view current data in a json file"""
+        # Class method to view the current data in the products.json file as a DataFrame.
         _, data = cls.file_info()
         df = pd.DataFrame(data)
         print("-" * 50)
@@ -24,10 +24,9 @@ class Products:
         else:
             print("No products in the DB right now")
     
-    
     @classmethod       
     def add(cls):
-        """Allows user to add data in a json file"""
+        # Class method to add a new product to the products.json file.
         file_path, data = cls.file_info()
         
         if data:
@@ -50,7 +49,7 @@ class Products:
             
         while True:
             try: 
-                quantity = round(float(input("Please provide product quantity: ")),2)
+                quantity = round(float(input("Please provide product quantity: ")), 2)
                 break
             except ValueError:
                 print("Quantity should be a number.")
@@ -68,10 +67,9 @@ class Products:
         print("-" * 50)
         print("Product added")
      
-     
     @classmethod   
     def update(cls):
-        """Allows user to update already existing json record"""
+        # Class method to update an existing product record in the products.json file.
         file_path, data = cls.file_info()
         while True:
             try:
@@ -88,7 +86,6 @@ class Products:
                 index_to_update = index
                 
         if found:
-            
             name = input("Update name (press Enter if you don't want to update it): ").title()
                 
             while True:
@@ -97,11 +94,9 @@ class Products:
                     price = round(float(price), 2)
                     break
                 except ValueError:
-                    
                     print("Price should be a number")
                     continue
               
-            
             while True:
                 try: 
                     quantity = input("Update quantity (press Enter if you don't want to update it): ")
@@ -133,10 +128,9 @@ class Products:
             print("-" * 50)
             print("Product not found")
         
-
     @classmethod   
     def remove(cls):
-        """Allows user to remove already existing json record"""
+        # Class method to remove an existing product record from the products.json file.
         file_path, data = cls.file_info()
         
         while True:
@@ -168,7 +162,7 @@ class Products:
                     break
                 elif not confirmation:
                     print("-" * 50)
-                    print("Product won't be remvoed")
+                    print("Product won't be removed")
                     break
         else:
             print("-" * 50)

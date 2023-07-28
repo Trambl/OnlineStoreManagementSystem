@@ -5,25 +5,19 @@ from FunctionsAndClasses.show_menu import write_json
 from FunctionsAndClasses.customers import Customers
 from FunctionsAndClasses.products import Products
 
-"""
-Users should be able to place new orders, specifying the customer and the products they want to purchase.
-Users should be able to view all orders and their details.
-Users should be able to update order information (e.g., add or remove products from an order).
-Users should be able to process orders (mark them as shipped or completed).
-"""
 
 class Orders:
     @classmethod   
     def file_info(cls):
+        # Class method to get file information, including file path and data, from the orders.json file.
         file_path = os.path.join(os.path.dirname(__file__), "..", "Data", "orders.json")
         with open(file_path, "r") as json_file:
             data = json.load(json_file)
         return file_path, data
     
-    
     @classmethod            
     def view(cls):
-        """Allows user to view current data in a json file"""
+        # Class method to view the current data in the orders.json file as a DataFrame.
         _, data = cls.file_info()
         df = pd.DataFrame(data)
         print("-" * 50)
@@ -32,10 +26,9 @@ class Orders:
         else:
             print("No orders in the DB right now")
     
-    
     @classmethod       
     def add(cls):
-        """Allows user to add data in a json file"""
+        # Class method to add a new order to the orders.json file.
         file_path, data = cls.file_info()
         
         if data:
@@ -54,7 +47,7 @@ class Orders:
                 break
             else:
                 print(50 * "-")
-                return print("ID doesn't exist in customers DB. Please add the customer prior to completing order for them.")
+                return print("ID doesn't exist in customers DB. Please add the customer prior to completing the order for them.")
         
         products = []
         quantity = []
@@ -79,21 +72,19 @@ class Orders:
                             print("Quantity should be a number")
                 else:
                     print(50 * "-")
-                    return print("ID doesn't exist in products DB. Please add the product prior to completing order for them.")
+                    return print("ID doesn't exist in products DB. Please add the product prior to completing the order for them.")
             else:
                 break
             
-    
         new_order = {"order_id": order_id, "customer_id": customer_id, "products": products, "quantity": quantity}
         data.append(new_order)
         write_json(file_path, data)
         print("-" * 50)
-        print("Product added")
+        print("Order added")
      
-    """only this to finish"""
     @classmethod   
     def update(cls):
-        """Allows user to update already existing json record"""
+        # Class method to update an existing order record in the orders.json file.
         file_path, data = cls.file_info()
         while True:
             try:
@@ -134,7 +125,7 @@ class Orders:
                             products.append(product_id)
                         else:
                             print(50 * "-")
-                            return print("ID doesn't exist in products DB. Please add the product prior to completing order for them.")
+                            return print("ID doesn't exist in products DB. Please add the product prior to completing the order for them.")
                     else:
                         products.append(product)
                 except ValueError:
@@ -159,10 +150,9 @@ class Orders:
                     except ValueError:
                         print("Quantity should be a number")
                 
-                
             while True:
                 try: 
-                    product_id = input("Do you want to add new product id to the order (press Enter if you don't want to add it): ")
+                    product_id = input("Do you want to add a new product id to the order (press Enter if you don't want to add it): ")
                     if not product_id:
                         break
                     product_id = int(product_id)
@@ -173,7 +163,7 @@ class Orders:
                     products.append(product_id)
                 else:
                     print(50 * "-")
-                    return print("ID doesn't exist in products DB. Please add the product prior to completing order for them.")
+                    return print("ID doesn't exist in products DB. Please add the product prior to completing the order for them.")
                 while True:
                     try:
                         quantity.append(int(input("Please provide quantity: ")))
@@ -181,22 +171,16 @@ class Orders:
                     except ValueError:
                         print("Quantity should be a number")
             
-                
-            
-            data[index_to_update]["products"] = products   
-            data[index_to_update]["quantity"] = quantity
+        data[index_to_update]["products"] = products   
+        data[index_to_update]["quantity"] = quantity
 
-            write_json(file_path, data)
-            print("-" * 50)
-            print("Information updated")
-        else:
-            print("-" * 50)
-            print("Order not found")
+        write_json(file_path, data)
+        print("-" * 50)
+        print("Information updated")
         
-
     @classmethod   
     def remove(cls):
-        """Allows user to remove already existing json record"""
+        # Class method to remove an existing order record from the orders.json file.
         file_path, data = cls.file_info()
         
         while True:
@@ -228,15 +212,9 @@ class Orders:
                     break
                 elif not confirmation:
                     print("-" * 50)
-                    print("Order won't be remvoed")
+                    print("Order won't be removed")
                     break
         else:
             print("-" * 50)
             print("Order not found")
-            
-"""
-- Users should be able to place new orders, specifying the customer and the products they want to purchase.
-- Users should be able to view all orders and their details.
-- Users should be able to update order information (e.g., add or remove products from an order).
-- Users should be able to process orders (mark them as shipped or completed).
-"""
+

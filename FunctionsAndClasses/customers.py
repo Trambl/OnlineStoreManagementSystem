@@ -2,20 +2,20 @@ import json
 import os
 import pandas as pd
 from FunctionsAndClasses.show_menu import is_valid_email, write_json
-    
-    
+
+
 class Customers:
     @classmethod   
     def file_info(cls):
+        # Class method to get file information, including file path and data, from the customers.json file.
         file_path = os.path.join(os.path.dirname(__file__), "..", "Data", "customers.json")
         with open(file_path, "r") as json_file:
             data = json.load(json_file)
         return file_path, data
         
-        
     @classmethod     
     def view(cls):
-        """Allows user to view current data in a json file"""
+        # Class method to view the current data in the customers.json file as a DataFrame.
         _, data = cls.file_info()
         df = pd.DataFrame(data)
         print("-" * 50)
@@ -25,10 +25,9 @@ class Customers:
         else:
             print("No customers in the DB right now")
             
-    
     @classmethod 
     def add(cls):
-        """Allows user to add data in a json file"""
+        # Class method to add a new customer to the customers.json file.
         file_path, data = cls.file_info()
         
         if data:
@@ -53,11 +52,10 @@ class Customers:
         write_json(file_path, data)
         print("-" * 50)
         print("User added")
-        
-        
+          
     @classmethod   
     def update(cls):
-        """Allows user to update already existing json record"""
+        # Class method to update an existing customer record in the customers.json file.
         file_path, data = cls.file_info()
         
         while True:
@@ -97,10 +95,9 @@ class Customers:
             print("-" * 50)
             print("User not found")
         
-
     @classmethod
     def remove(cls):
-        """Allows user to remove already existing json record"""
+        # Class method to remove an existing customer record from the customers.json file.
         file_path, data = cls.file_info()
         
         while True:
@@ -131,7 +128,7 @@ class Customers:
                     break
                 elif not confirmation:
                     print("-" * 50)
-                    print("Customer won't be remvoed")
+                    print("Customer won't be removed")
                     break
         else:
             print("-" * 50)
