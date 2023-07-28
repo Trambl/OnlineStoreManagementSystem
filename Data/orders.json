@@ -3,19 +3,11 @@
         "order_id": 1,
         "customer_id": 1,
         "products": [
+            2,
             1
         ],
         "quantity": [
-            10
-        ]
-    },
-    {
-        "order_id": 2,
-        "customer_id": 1,
-        "products": [
-            2
-        ],
-        "quantity": [
+            6,
             10
         ]
     }

@@ -1,2 +1,16 @@
 [
+    {
+        "id": 1,
+        "name": "Laptop",
+        "quantity": "10.00",
+        "price": "999.99",
+        "total price": "9,999.90"
+    },
+    {
+        "id": 2,
+        "name": "Phone",
+        "quantity": "20.00",
+        "price": "300.00",
+        "total price": "6,000.00"
+    }
 ]
