@@ -86,6 +86,10 @@ Product added
 --------------------------------------------------
 ```
 
+## Video Demo
+
+You can find a video demo of the Online Store Management System [here](<URL HERE>).
+
 ## License
 
 This project is licensed under the [MIT License](https://www.mit.edu/~amini/LICENSE.md).
